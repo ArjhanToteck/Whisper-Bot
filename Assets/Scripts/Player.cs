@@ -46,8 +46,6 @@ public class Player : MonoBehaviour
 	{
 		animator.SetBool("right", false);
 		animator.SetBool("left", false);
-		animator.SetBool("jump", false);
-		animator.ResetTrigger("slide");
 
 		if (right)
 		{
@@ -63,17 +61,11 @@ public class Player : MonoBehaviour
 				animator.SetBool("left", true);
 			}
         }
-		
-		if (jump)
-        {
-            animator.SetBool("jump", true);
-        }
-        else if(slide)
-        {
-            animator.SetTrigger("slide");
-        }
 
-        right = false;
+		animator.SetBool("jump", jump);
+		animator.SetBool("slide", slide);
+
+		right = false;
         left = false;
         jump = false;
         slide = false;
