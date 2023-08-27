@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	public Camera camera;
     public Animator animator;
+	public Transform hips;
 
     public int lane = 0;
     float laneSize = 1.75f;
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
 	{
 		animator.SetBool("right", false);
 		animator.SetBool("left", false);
-		animator.ResetTrigger("jump");
+		animator.SetBool("jump", false);
 		animator.ResetTrigger("slide");
 
 		if (right)
@@ -61,9 +63,10 @@ public class Player : MonoBehaviour
 				animator.SetBool("left", true);
 			}
         }
-        else if (jump)
+		
+		if (jump)
         {
-            animator.SetTrigger("jump");
+            animator.SetBool("jump", true);
         }
         else if(slide)
         {
@@ -88,6 +91,10 @@ public class Player : MonoBehaviour
 
 	public void MoveToLane()
 	{
-		transform.position = new Vector3(lane * laneSize, transform.position.y, transform.position.z);
+		Vector3 newPosition = new Vector3(lane * laneSize, transform.position.y, transform.position.z);
+
+		transform.position = newPosition;
+		camera.transform.position = newPosition;
+		hips.transform.position = newPosition;
 	}
 }
