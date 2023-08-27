@@ -102,5 +102,6 @@ public class GameManager : MonoBehaviour
 	public void Stop()
 	{
 		stopped = true;
+		player.GetComponent<Animator>().SetBool("death", true);
 	}
 }
