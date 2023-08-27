@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		animator.ResetTrigger("right");
-		animator.ResetTrigger("left");
+		animator.SetBool("right", false);
+		animator.SetBool("left", false);
 		animator.ResetTrigger("jump");
 		animator.ResetTrigger("slide");
 
@@ -51,14 +51,14 @@ public class Player : MonoBehaviour
 		{
             if(lane < 1)
             {
-				animator.SetTrigger("right");
+				animator.SetBool("right", true);
 			}
 		}
         else if (left)
         {
 			if (lane > -1)
 			{
-				animator.SetTrigger("left");
+				animator.SetBool("left", true);
 			}
         }
         else if (jump)

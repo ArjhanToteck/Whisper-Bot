@@ -12,6 +12,7 @@ public class Obstacle : MonoBehaviour
 		{
 			rigidbody.constraints = RigidbodyConstraints.None;
 
+
 			FindObjectOfType<GameManager>().Stop();
 		}
 	}
