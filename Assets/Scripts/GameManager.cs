@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 			newFloor.transform.position = new Vector3(0, 0, floors[floors.Count - 2].transform.position.z + floorSize);
 		}
 
-		//SpawnObstacles(newFloor.transform);
+		SpawnObstacles(newFloor.transform);
 
 		return newFloor;
 	}
