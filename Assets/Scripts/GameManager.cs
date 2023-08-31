@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	public bool menu = false;
+
     public GameObject floorPrefab;
 	public List<GameObject> floors;
 
@@ -15,15 +18,17 @@ public class GameManager : MonoBehaviour
 	public float floorSize = 54.5000063f;
 	public float laneSize = 1.75f;
 
-
 	public GameObject player;
 
+	public GameObject deathPanel;
 	bool stopped = false;
 
 	void Start()
 	{
+		GenerateChunk(false);
+
 		// loop for number of floors that need to render
-		for (int i = 0; i < floorRenderAmount; i++)
+		for (int i = 0; i < floorRenderAmount - 1; i++)
 		{
 			// make new floor
 			GenerateChunk();
@@ -58,7 +63,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	GameObject GenerateChunk()
+	GameObject GenerateChunk(bool obstacles = true)
 	{
 		// make new floor
 		GameObject newFloor = Instantiate(floorPrefab);
@@ -76,7 +81,7 @@ public class GameManager : MonoBehaviour
 			newFloor.transform.position = new Vector3(0, 0, floors[floors.Count - 2].transform.position.z + floorSize);
 		}
 
-		SpawnObstacles(newFloor.transform);
+		if(obstacles && !menu) SpawnObstacles(newFloor.transform);
 
 		return newFloor;
 	}
@@ -103,5 +108,21 @@ public class GameManager : MonoBehaviour
 	{
 		stopped = true;
 		player.GetComponent<Animator>().SetBool("death", true);
+		deathPanel.SetActive(true);
+	}
+
+	public void LoadScene(string scene)
+	{
+		SceneManager.LoadScene(scene);
+	}
+
+	public void ReloadScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Quit()
+	{
+		Application.Quit();
 	}
 }

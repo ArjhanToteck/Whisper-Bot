@@ -23,11 +23,11 @@ public class Player : MonoBehaviour
 
 	void Update()
     {
-        if(Input.GetAxis("Horizontal") > 0.25f)
+        if(Input.GetAxis("Horizontal") > 0.05f)
         {
             right = true;
         }
-        else if(Input.GetAxis("Horizontal") < -0.25f)
+        else if(Input.GetAxis("Horizontal") < -0.05f)
         {
             left = true;
         }
